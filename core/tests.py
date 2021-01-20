@@ -19,6 +19,7 @@ def passive_tests(url, acao_header):
 		return 'Invalid value'
 
 def active_tests(url, root, scheme, delay):
+	print(url, root, scheme, delay)
 	acao_header = requester(url, scheme, 'example.com')
 	if acao_header:
 		if acao_header == (scheme + 'example.com'):

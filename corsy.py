@@ -28,8 +28,8 @@ def cors(target, delay, scheme=False):
 	url = target
 	if not target.startswith(('http://', 'https://')):
 		url = scheme + '://' + url
-	root = host(url)
 	parsed = urlparse(url)
+	root = host(url) or parsed.hostname
 	netloc = parsed.netloc
 	scheme = parsed.scheme
 	url = scheme + '://' + netloc
