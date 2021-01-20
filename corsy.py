@@ -3,9 +3,11 @@
 
 import argparse
 
-from core.utils import load_json, host
-from core.tests import active_tests
+import requests
+
 from core.colors import white, green, info, bad, good, grey, end
+from core.tests import active_tests
+from core.utils import load_json, host
 
 try:
     from urllib.parse import urlparse
@@ -52,7 +54,7 @@ if target_url:
                 print('%s Exploitation: %s' % (info, details[result.lower()]['Exploitation']))
             else:
                 print('%s No misconfiguration found.' % bad)
-        except ConnectionError:
+        except requests.exceptions.ConnectionError:
             print('%s Connection refused.' % bad)
     else:
         print('%s Please use https://example.com not example.com' % bad)
