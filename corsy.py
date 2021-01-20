@@ -40,15 +40,18 @@ details = load_json('./db/details.json')
 
 if target_url:
 	if target_url.startswith(('http://', 'https://')):
-		result = cors(target_url, delay)
-		if result:
-			print('%s Misconfiguration found!' % good)
-			print('%s Title: %s' % (info, result))
-			print('%s Description: %s' % (info, details[result.lower()]['Description']))
-			print('%s Severity: %s' % (info, details[result.lower()]['Severity']))
-			print('%s Exploitation: %s' % (info, details[result.lower()]['Exploitation']))
-		else:
-			print('%s No misconfiguration found.' % bad)
+		try:
+			result = cors(target_url, delay)
+			if result:
+					print('%s Misconfiguration found!' % good)
+					print('%s Title: %s' % (info, result))
+					print('%s Description: %s' % (info, details[result.lower()]['Description']))
+					print('%s Severity: %s' % (info, details[result.lower()]['Severity']))
+					print('%s Exploitation: %s' % (info, details[result.lower()]['Exploitation']))
+				else:
+					print('%s No misconfiguration found.' % bad)
+		except ConnectionError:
+			print('%s Connection refused.' % bad)
 	else:
 		print('%s Please use https://example.com not example.com' % bad)
 else:
