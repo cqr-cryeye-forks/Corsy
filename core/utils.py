@@ -1,5 +1,6 @@
-import tld
 import json
+
+import tld
 
 
 def load_file(path):
